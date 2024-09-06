@@ -8,11 +8,19 @@ import (
 )
 
 type Config struct {
-	AppName string `yaml:"app_name"`
+	AppName     string `yaml:"app_name"`
+	Description string `yaml:"description"`
+	Author      Author `yaml:"author"`
+}
+
+type Author struct {
+	Name  string `yaml:"name"`
+	Email string `yaml:"email"`
 }
 
 func LoadConfig(filePath string) (*Config, error) {
 	file, err := os.Open(filePath)
+
 	if err != nil {
 		return nil, err
 	}
