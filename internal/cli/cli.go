@@ -8,8 +8,19 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+type CLIConfig struct {
+	AppName     string `yaml:"app_name"`
+	Description string `yaml:"description"`
+	Author      Author `yaml:"author"`
+}
+
+type Author struct {
+	Name  string `yaml:"name"`
+	Email string `yaml:"email"`
+}
+
 func main() {
-	cfg, err_cli := config.LoadConfig("internal/cli/config.yml")
+	cfg, err_cli := config.LoadConfig[CLIConfig]("internal/cli/config.yml")
 
 	if err_cli != nil {
 		log.Fatal(err_cli)
